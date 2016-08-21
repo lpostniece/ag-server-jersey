@@ -44,7 +44,7 @@ class AgServer {
   def getCSV() : String = {
     log.debug("getCSV")
 
-    CSVTable.mergeFiles
+    CSVTable.mergeFiles(List("initial.csv"))
   }
 
 }

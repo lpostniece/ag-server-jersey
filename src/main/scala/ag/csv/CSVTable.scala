@@ -6,27 +6,27 @@ import com.github.tototoshi.csv._
 
 object CSVTable {
 
-  def mergeFiles(): String = {
-  //def mergeFiles(fileNames: List[String]): String = {
+  def mergeFiles(fileNames: List[String]): String = {
+    val clazz = getClass()
+
     // open a reader for each file
     // build up a list of columns including unified lat and long
     // add to writer
 
-    val clazz = getClass()
+    val data: List[Map[String, String]] = (for {
+      fileName <- fileNames
+      reader = CSVReader.open(scala.io.Source.fromInputStream(clazz.getResourceAsStream("/" + fileName)))
+      fileData: List[Map[String, String]] = reader.allWithHeaders()
+    } yield fileData).flatten
 
-    // read it in
-    //val reader = CSVReader.open(scala.io.Source.fromString("ID,Name,Lat,Lon\n1,Bacchus Marsh Airport,-37.7313,144.4212"))
-    val reader = CSVReader.open(scala.io.Source.fromInputStream(clazz.getResourceAsStream("/initial.csv")))
-    val data: List[Map[String, String]] = reader.allWithHeaders()
+    // TODO: fill in blank values
 
     val allHeaders: Set[String] = {
       for (row <- data)
         yield (row.keys)
     }.flatten.toSet
 
-    // TODO: merge with others
-
-    // write it back, to String initially
+    // write it back to one file, to String initially
     val internalWriter = new StringWriter()
     val writer = CSVWriter.open(internalWriter)
 

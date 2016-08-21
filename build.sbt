@@ -24,6 +24,7 @@ libraryDependencies ++= Seq(
 
 libraryDependencies += "com.github.tototoshi" %% "scala-csv" % "1.3.3"
 
+libraryDependencies += "org.scalatest" %% "scalatest" % "2.2.4" % "test"
 
 enablePlugins(JettyPlugin)
 
