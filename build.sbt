@@ -22,5 +22,8 @@ libraryDependencies ++= Seq(
   "io.swagger" % "swagger-annotations" % "1.5.6"
 )
 
+libraryDependencies += "com.github.tototoshi" %% "scala-csv" % "1.3.3"
+
+
 enablePlugins(JettyPlugin)
 

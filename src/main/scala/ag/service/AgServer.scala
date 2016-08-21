@@ -2,8 +2,9 @@ package ag.service
 
 import javax.servlet.{ServletContextEvent, ServletContextListener}
 import javax.ws.rs._
-import javax.ws.rs.core.MediaType
+import javax.ws.rs.core.{MediaType, StreamingOutput}
 
+import ag.csv.CSVTable
 import io.swagger.annotations.Api
 import org.glassfish.jersey.filter.LoggingFilter
 import org.glassfish.jersey.media.multipart.MultiPartFeature
@@ -28,7 +29,6 @@ object AgServer {
     classOf[LoggingFilter])
 }
 
-
 @Path("/v1")
 @Api("ag-server")
 class AgServer {
@@ -44,8 +44,7 @@ class AgServer {
   def getCSV() : String = {
     log.debug("getCSV")
 
-    "ID,Name,Lat,Lon\n1,Bacchus Marsh Airport,-37.7313,144.4212"
-
+    CSVTable.mergeFiles
   }
 
 }
